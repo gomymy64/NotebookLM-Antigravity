@@ -374,6 +374,67 @@ body::before {
   fill: currentColor;
 }
 
+/* CTA BLOCK */
+@keyframes ctaGlow {
+  0%, 100% { box-shadow: 0 0 20px #00f5d415, 0 0 60px #00f5d408; border-color: var(--border); }
+  50% { box-shadow: 0 0 30px #00f5d425, 0 0 80px #00f5d412; border-color: #00f5d440; }
+}
+.cta-block {
+  position: relative;
+  max-width: 800px;
+  margin: 60px auto 40px;
+  padding: 40px 40px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  overflow: hidden;
+  animation: ctaGlow 3s ease-in-out infinite;
+}
+.cta-text {
+  font-family: 'Unbounded', sans-serif;
+  font-size: clamp(16px, 2.5vw, 22px);
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.4;
+  flex: 1;
+}
+.cta-text span {
+  background: var(--gradient1);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.cta-btn {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 18px 40px;
+  background: var(--gradient1);
+  color: #0a0a0f;
+  font-family: 'Unbounded', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-decoration: none;
+  border-radius: var(--radius);
+  transition: transform 0.2s, box-shadow 0.2s;
+  white-space: nowrap;
+}
+.cta-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px #00f5d450;
+}
+.cta-btn svg { width: 16px; height: 16px; fill: #0a0a0f; }
+@media (max-width: 600px) {
+  .cta-block { flex-direction: column; text-align: center; padding: 32px 24px; }
+  .cta-btn { width: 100%; justify-content: center; }
+}
+
 /* FOOTER */
 footer {
   border-top: 1px solid var(--border);
@@ -797,8 +858,13 @@ notebooklm-py v0.3.4 | AntiGravity Integration | Built with 🧠 NotebookLM + �
 
 </div>
 
+<div class="cta-block">
+  <div class="cta-text">Пошаговый план по выходу на первые <span>100к в ИИ</span> в 2026</div>
+  <a href="https://t.me/mastodont_aibot?start=agency" target="_blank" class="cta-btn"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg> ЗАБРАТЬ</a>
+</div>
+
 <footer>
-  Сделано с <span>🧠 NotebookLM</span> + <span>⚡ AntiGravity</span>
+  <span>МАСТОДОНТ</span> — AI и нейросети, просто, по делу
 </footer>
 
 <script>
