@@ -374,65 +374,147 @@ body::before {
   fill: currentColor;
 }
 
-/* CTA BLOCK */
+/* CTA */
 @keyframes ctaGlow {
-  0%, 100% { box-shadow: 0 0 20px #00f5d415, 0 0 60px #00f5d408; border-color: var(--border); }
-  50% { box-shadow: 0 0 30px #00f5d425, 0 0 80px #00f5d412; border-color: #00f5d440; }
+  0%, 100% { box-shadow: 0 0 60px rgba(0, 245, 212, 0.06); }
+  50% { box-shadow: 0 0 100px rgba(0, 245, 212, 0.16); }
 }
-.cta-block {
-  position: relative;
-  max-width: 800px;
-  margin: 60px auto 40px;
-  padding: 40px 40px;
+.cta {
   background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
+  border: 1px solid var(--border-glow);
+  padding: clamp(36px, 5vw, 60px) clamp(28px, 5vw, 64px);
+  margin: 60px auto 40px;
+  max-width: 800px;
+  border-radius: 0;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(28px, 3vw, 40px);
+  position: relative;
+  animation: ctaGlow 3s ease-in-out infinite;
+  overflow: hidden;
+}
+.cta::before {
+  content: '';
+  position: absolute;
+  top: -150px; right: -150px;
+  width: 360px; height: 360px;
+  background: radial-gradient(circle, rgba(0,245,212,0.10) 0%, transparent 60%);
+  pointer-events: none;
+}
+.cta::after {
+  content: '';
+  position: absolute;
+  bottom: -120px; left: -120px;
+  width: 320px; height: 320px;
+  background: radial-gradient(circle, rgba(123,47,247,0.08) 0%, transparent 60%);
+  pointer-events: none;
+}
+.cta-title {
+  font-family: 'Unbounded', sans-serif;
+  font-size: clamp(26px, 4.4vw, 52px);
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  color: var(--text);
+  position: relative;
+  z-index: 1;
+  text-transform: uppercase;
+}
+.cta-title .grad {
+  background: var(--gradient1);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.cta-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(20px, 3vw, 40px);
+  position: relative;
+  z-index: 1;
+}
+@media (max-width: 720px) {
+  .cta-grid { grid-template-columns: 1fr; }
+}
+.cta-block-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  color: var(--accent);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.cta-block-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, var(--accent) 0%, transparent 100%);
+}
+.cta-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.cta-list li {
+  font-family: 'Manrope', sans-serif;
+  font-size: clamp(14px, 1.4vw, 16px);
+  line-height: 1.5;
+  color: var(--text);
+  padding: 9px 0 9px 32px;
+  position: relative;
+  border-bottom: 1px dashed var(--border);
+}
+.cta-list li:last-child { border-bottom: none; }
+.cta-list li::before {
+  position: absolute;
+  left: 0;
+  top: 9px;
+  font-size: 16px;
+}
+.cta-list.checks li::before { content: '✅'; }
+.cta-list.bonuses li:nth-child(1)::before { content: '💰'; }
+.cta-list.bonuses li:nth-child(2)::before { content: '🚀'; }
+.cta-bottom {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 32px;
-  overflow: hidden;
-  animation: ctaGlow 3s ease-in-out infinite;
+  gap: 20px;
+  flex-wrap: wrap;
+  border-top: 1px solid var(--border);
+  padding-top: clamp(24px, 3vw, 36px);
+  position: relative;
+  z-index: 1;
 }
-.cta-text {
-  font-family: 'Unbounded', sans-serif;
-  font-size: clamp(16px, 2.5vw, 22px);
-  font-weight: 600;
-  color: var(--text);
-  line-height: 1.4;
-  flex: 1;
+.cta-free {
+  font-family: 'Space Mono', monospace;
+  font-size: 13px;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
 }
-.cta-text span {
-  background: var(--gradient1);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
+.cta-free b { color: var(--accent); font-weight: 700; }
 .cta-btn {
-  flex-shrink: 0;
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  padding: 18px 40px;
-  background: var(--gradient1);
-  color: #0a0a0f;
   font-family: 'Unbounded', sans-serif;
-  font-size: 14px;
+  font-size: clamp(13px, 1.3vw, 15px);
   font-weight: 700;
-  letter-spacing: 1px;
+  background: var(--gradient1);
+  color: var(--bg);
+  border: none;
+  padding: 20px 48px;
   text-decoration: none;
-  border-radius: var(--radius);
-  transition: transform 0.2s, box-shadow 0.2s;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: all 0.2s ease;
+  cursor: pointer;
   white-space: nowrap;
+  display: inline-block;
 }
-.cta-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 40px #00f5d450;
-}
-.cta-btn svg { width: 16px; height: 16px; fill: #0a0a0f; }
-@media (max-width: 600px) {
-  .cta-block { flex-direction: column; text-align: center; padding: 32px 24px; }
-  .cta-btn { width: 100%; justify-content: center; }
+.cta-btn:hover { transform: translateY(-2px) scale(1.03); box-shadow: 0 12px 40px rgba(0, 245, 212, 0.3); }
+@media (max-width: 720px) {
+  .cta-bottom { flex-direction: column; align-items: stretch; text-align: center; }
+  .cta-btn { width: 100%; text-align: center; }
 }
 
 /* FOOTER */
@@ -851,10 +933,33 @@ notebooklm-py v0.3.4 | AntiGravity Integration | Built with 🧠 NotebookLM + �
 
 </div>
 
-<div class="cta-block">
-  <div class="cta-text">Пошаговый план по выходу на первые <span>100к в ИИ</span> в 2026</div>
-  <a href="https://t.me/mastodont_aibot?start=agency" target="_blank" class="cta-btn"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg> ЗАБРАТЬ</a>
-</div>
+<a href="https://t.me/IntensivMastaBot" target="_blank" rel="noopener" class="cta" style="text-decoration:none;">
+  <h2 class="cta-title">Первые <span class="grad">$1200</span> на&nbsp;ИИ -<br>бесплатный интенсив</h2>
+
+  <div class="cta-grid">
+    <div>
+      <div class="cta-block-label">Внутри</div>
+      <ul class="cta-list checks">
+        <li>Реальный демо AntiGravity вживую</li>
+        <li>Софт, который за 5 минут находит компании без сайтов с готовыми контактами</li>
+        <li>Кейсы учеников: $1650 за 3 проекта без команды</li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="cta-block-label">Два бонуса в конце</div>
+      <ul class="cta-list bonuses">
+        <li>50 скучных и самых прибыльных ниш без конкуренции</li>
+        <li>Чек-лист: первые $500 за 7 дней</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="cta-bottom">
+    <div class="cta-free"><b>Бесплатно.</b> Навсегда.</div>
+    <span class="cta-btn">Забрать интенсив</span>
+  </div>
+</a>
 
 <footer>
   <a href="https://aimastodont.com" target="_blank" style="text-decoration:none;color:inherit"><span>МАСТОДОНТ</span></a> — AI и нейросети, просто, по делу
